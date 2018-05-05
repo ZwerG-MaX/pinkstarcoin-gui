@@ -48,7 +48,7 @@ public:
     QAction *m_openWalletAction;
     QAction *m_encryptWalletAction;
     QAction *m_changePasswordAction;
-    QAction *m_aboutinbestcoinAction;
+    QAction *m_aboutpinkstarcoinAction;
     QAction *m_aboutQtAction;
     QAction *m_backupWalletAction;
     QAction *m_autostartAction;
@@ -63,6 +63,7 @@ public:
     QAction *m_resetAction;
     QAction *m_saveKeysAction;
     QAction *m_exportKeyAction;
+	QAction *m_exportPrivateKeyAction;
     QAction *m_removePendingTxAction;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_2;
@@ -141,7 +142,7 @@ public:
         MainWindow->setMinimumSize(QSize(1260, 600));
         MainWindow->setMaximumSize(QSize(16777215, 16777215));
         QIcon icon;
-        icon.addFile(QStringLiteral(":/images/inbestcoin"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/images/pinkstarcoin"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
         m_exitAction = new QAction(MainWindow);
         m_exitAction->setObjectName(QStringLiteral("m_exitAction"));
@@ -159,9 +160,9 @@ public:
         m_changePasswordAction = new QAction(MainWindow);
         m_changePasswordAction->setObjectName(QStringLiteral("m_changePasswordAction"));
         m_changePasswordAction->setEnabled(true);
-        m_aboutinbestcoinAction = new QAction(MainWindow);
-        m_aboutinbestcoinAction->setObjectName(QStringLiteral("m_aboutinbestcoinAction"));
-        m_aboutinbestcoinAction->setEnabled(true);
+        m_aboutpinkstarcoinAction = new QAction(MainWindow);
+        m_aboutpinkstarcoinAction->setObjectName(QStringLiteral("m_aboutpinkstarcoinAction"));
+        m_aboutpinkstarcoinAction->setEnabled(true);
         m_aboutQtAction = new QAction(MainWindow);
         m_aboutQtAction->setObjectName(QStringLiteral("m_aboutQtAction"));
         m_aboutQtAction->setEnabled(true);
@@ -195,6 +196,8 @@ public:
         m_saveKeysAction->setObjectName(QStringLiteral("m_saveKeysAction"));
         m_exportKeyAction = new QAction(MainWindow);
         m_exportKeyAction->setObjectName(QStringLiteral("m_exportKeyAction"));
+		m_exportPrivateKeyAction = new QAction(MainWindow);
+		m_exportPrivateKeyAction->setObjectName(QStringLiteral("m_exportPrivateKeyAction"));
         m_removePendingTxAction = new QAction(MainWindow);
         m_removePendingTxAction->setObjectName(QStringLiteral("m_removePendingTxAction"));
         m_removePendingTxAction->setCheckable(false);
@@ -570,6 +573,7 @@ public:
         menuFile->addAction(m_saveKeysAction);
         menuFile->addAction(m_resetAction);
         menuFile->addAction(m_importKeyAction);
+		menuFile->addAction(m_exportPrivateKeyAction);
         menuFile->addAction(m_exportKeyAction);
         menuFile->addAction(m_exportTrackingKeyAction);
         menuFile->addAction(m_exitAction);
@@ -585,7 +589,7 @@ public:
         menuSettings->addAction(menuThemes->menuAction());
         menuHelp->addAction(m_communityForumAction);
         menuHelp->addAction(m_reportIssueAction);
-        menuHelp->addAction(m_aboutinbestcoinAction);
+        menuHelp->addAction(m_aboutpinkstarcoinAction);
         menuHelp->addAction(m_aboutQtAction);
 
         retranslateUi(MainWindow);
@@ -596,7 +600,7 @@ public:
 		QObject::connect(m_removePendingTxAction, SIGNAL(triggered()), MainWindow, SLOT(removePendingTx()));
         QObject::connect(m_aboutQtAction, SIGNAL(triggered()), MainWindow, SLOT(aboutQt()));
         QObject::connect(m_backupWalletAction, SIGNAL(triggered()), MainWindow, SLOT(backupWallet()));
-        QObject::connect(m_aboutinbestcoinAction, SIGNAL(triggered()), MainWindow, SLOT(about()));
+        QObject::connect(m_aboutpinkstarcoinAction, SIGNAL(triggered()), MainWindow, SLOT(about()));
         QObject::connect(m_overviewButton, SIGNAL(toggled(bool)), m_overviewFrame, SLOT(setVisible(bool)));
         QObject::connect(m_transactionsButton, SIGNAL(toggled(bool)), m_transactionsFrame, SLOT(setVisible(bool)));
         QObject::connect(m_addressBookButton, SIGNAL(toggled(bool)), m_addressBookFrame, SLOT(setVisible(bool)));
@@ -616,6 +620,7 @@ public:
         QObject::connect(m_resetAction, SIGNAL(triggered()), MainWindow, SLOT(resetWallet()));
         QObject::connect(m_saveKeysAction, SIGNAL(triggered()), MainWindow, SLOT(saveWalletKeys()));
         QObject::connect(m_exportKeyAction, SIGNAL(triggered()), MainWindow, SLOT(exportKey()));
+		QObject::connect(m_exportPrivateKeyAction, SIGNAL(triggered()), MainWindow, SLOT(exportPrivateKeys()));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -632,7 +637,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         m_changePasswordAction->setToolTip(QApplication::translate("MainWindow", "Change password", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        m_aboutinbestcoinAction->setText(QApplication::translate("MainWindow", "About inbestcoin", Q_NULLPTR));
+        m_aboutpinkstarcoinAction->setText(QApplication::translate("MainWindow", "About pinkstarcoin", Q_NULLPTR));
         m_aboutQtAction->setText(QApplication::translate("MainWindow", "About Qt", Q_NULLPTR));
         m_backupWalletAction->setText(QApplication::translate("MainWindow", "Backup wallet", Q_NULLPTR));
         m_autostartAction->setText(QApplication::translate("MainWindow", "Start on system login", Q_NULLPTR));
@@ -648,13 +653,15 @@ public:
 #ifndef QT_NO_TOOLTIP
         m_importKeyAction->setToolTip(QApplication::translate("MainWindow", "Import key", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        m_communityForumAction->setText(QApplication::translate("MainWindow", "Join us on Telegram", Q_NULLPTR));
+        m_communityForumAction->setText(QApplication::translate("MainWindow", "Join us on Discord", Q_NULLPTR));
         m_reportIssueAction->setText(QApplication::translate("MainWindow", "Report an issue", Q_NULLPTR));
         m_resetAction->setText(QApplication::translate("MainWindow", "Reset wallet", Q_NULLPTR));
         m_saveKeysAction->setText(QApplication::translate("MainWindow", "Save wallet keys", Q_NULLPTR));
         m_exportKeyAction->setText(QApplication::translate("MainWindow", "Export key", Q_NULLPTR));
+		m_exportPrivateKeyAction->setText(QApplication::translate("MainWindow", "Export secret key", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
         m_exportKeyAction->setToolTip(QApplication::translate("MainWindow", "Export key", Q_NULLPTR));
+		m_exportPrivateKeyAction->setToolTip(QApplication::translate("MainWindow", "Export secret key", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         m_removePendingTxAction->setText(QApplication::translate("MainWindow", "Remove pending TXs", Q_NULLPTR));
         m_logoLabel->setText(QString());
@@ -677,7 +684,7 @@ public:
         m_balanceCopyLabel->setText(QApplication::translate("MainWindow", "Copied!", Q_NULLPTR));
         m_balanceIconLabel->setText(QString());
         m_overviewButton->setText(QApplication::translate("MainWindow", "OVERVIEW", Q_NULLPTR));
-        m_sendButton->setText(QApplication::translate("MainWindow", "SEND inbestcoinS", Q_NULLPTR));
+        m_sendButton->setText(QApplication::translate("MainWindow", "SEND PINKSTARCOIN", Q_NULLPTR));
         m_transactionsButton->setText(QApplication::translate("MainWindow", "TRANSACTIONS", Q_NULLPTR));
         m_blockExplorerButton->setText(QApplication::translate("MainWindow", "BLOCK EXPLORER", Q_NULLPTR));
         m_addressBookButton->setText(QApplication::translate("MainWindow", "CONTACTS", Q_NULLPTR));

@@ -98,13 +98,13 @@
     </qresource>
     <qresource prefix="/images">
         <file alias="splash">images/splash.png</file>
-        <file alias="inbestcoin_lin">images/inbestcoin.png</file>
+        <file alias="pinkstarcoin_lin">images/pinkstarcoin.png</file>
         <file alias="add_address_helper">images/add_address_helper.png</file>
-        <file alias="inbestcoin_mac">images/inbestcoin.icns</file>
-        <file alias="inbestcoin_win">images/inbestcoin.png</file>
+        <file alias="pinkstarcoin_mac">images/pinkstarcoin.icns</file>
+        <file alias="pinkstarcoin_win">images/pinkstarcoin.png</file>
     </qresource>
     <qresource prefix="/style">
-        <file alias="qss">inbestcoinwallet.qss</file>
+        <file alias="qss">pinkstarcoinwallet.qss</file>
     </qresource>
     <qresource prefix="/font">
         <file alias="Bold">font/OpenSans-Bold.ttf</file>

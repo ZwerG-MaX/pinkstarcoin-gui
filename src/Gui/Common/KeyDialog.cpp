@@ -1,19 +1,19 @@
-// Copyright (c) 2015-2017, The Bytecoin developers
+// Copyright (c) 2015-2018, The Bytecoin developers
 //
 // This file is part of Bytecoin.
 //
-// inbestcoin is free software: you can redistribute it and/or modify
+// pinkstarcoin is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// inbestcoin is distributed in the hope that it will be useful,
+// pinkstarcoin is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with inbestcoin.  If not, see <http://www.gnu.org/licenses/>.
+// along with pinkstarcoin.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -75,6 +75,27 @@ KeyDialog::KeyDialog(const QByteArray& _key, bool _isTracking, QWidget *_parent)
   m_ui->m_cancelButton->hide();
   setFixedHeight(195);
   setStyleSheet(Settings::instance().getCurrentStyle().makeStyleSheet(KEY_DIALOG_STYLE_SHEET_TEMPLATE));
+}
+
+KeyDialog::KeyDialog(const QByteArray& _key, bool _isTracking, bool _isPrivateKeyExport, QWidget *_parent)
+	: QDialog(_parent, static_cast<Qt::WindowFlags>(Qt::WindowCloseButtonHint))
+	, m_ui(new Ui::KeyDialog)
+	, m_isTracking(_isTracking)
+	, m_isExport(true)
+	, m_key(_key) {
+	m_ui->setupUi(this);
+	m_ui->m_fileButton->setText(tr("Save to file"));
+	m_ui->m_okButton->setText(tr("Close"));
+	m_ui->m_keyEdit->setReadOnly(true);
+	m_ui->m_keyEdit->setPlainText("Secret spend key:\n" + m_key.toHex().toUpper().mid(0,64) + "\n\nSecret view key:\n" + m_key.toHex().toUpper().mid(64));
+	if (_isPrivateKeyExport) {
+		m_ui->m_descriptionLabel->setText(tr("These keys allow restoration of your wallet in new wallet software version 1.4.2 and above."));
+	}
+
+	m_ui->m_cancelButton->hide();
+	setFixedHeight(195);
+	setStyleSheet(Settings::instance().getCurrentStyle().makeStyleSheet(KEY_DIALOG_STYLE_SHEET_TEMPLATE));
+	setWindowTitle(tr("Export secret keys"));
 }
 
 KeyDialog::KeyDialog(QWidget* _parent)

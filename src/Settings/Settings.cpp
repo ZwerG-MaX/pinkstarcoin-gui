@@ -1,19 +1,19 @@
-// Copyright (c) 2015-2017, The Bytecoin developers
+// Copyright (c) 2015-2018, The Bytecoin developers
 //
 // This file is part of Bytecoin.
 //
-// inbestcoin is free software: you can redistribute it and/or modify
+// pinkstarcoin is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// inbestcoin is distributed in the hope that it will be useful,
+// pinkstarcoin is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with inbestcoin.  If not, see <http://www.gnu.org/licenses/>.
+// along with pinkstarcoin.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QCoreApplication>
 #include <QFile>
@@ -64,14 +64,14 @@ const char OPTION_CLOSE_TO_TRAY[] = "closeToTray";
 const char OPTION_PRIVACY_PARAMS[] = "privacyParams";
 const char OPTION_PRIVACY_NEWS_ENABLED[] = "newsEnabled";
 
-const char DEFAULT_WALLET_FILE_NAME[] = "inbestcoin.wallet";
+const char DEFAULT_WALLET_FILE_NAME[] = "pinkstarcoin.wallet";
 const quint64 DEFAULT_OPTIMIZATION_PERIOD = 1000 * 60 * 30; // 30 minutes
 const quint64 DEFAULT_OPTIMIZATION_THRESHOLD = 10000000000000;
 const quint64 DEFAULT_OPTIMIZATION_MIXIN = 6;
 
 const quint64 VERSION_MAJOR = 1;
 const quint64 VERSION_MINOR = 4;
-const quint64 VERSION_PATCH = 1;
+const quint64 VERSION_PATCH = 2;
 
 }
 
@@ -82,7 +82,7 @@ Settings& Settings::instance() {
 
 
 Settings::Settings() : m_p2pBindPort(0), m_cmdLineParser(nullptr) {
-  m_defaultPoolList << "45.32.171.89:4444";
+  m_defaultPoolList << "pnks.poolmining.us:3333";
 
   Style* lightStyle = new LightStyle();
   Style* darkStyle = new DarkStyle();
@@ -107,14 +107,10 @@ void Settings::setCommandLineParser(CommandLineParser* _cmdLineParser) {
 }
 
 void Settings::init() {
-  QFile cfgFile(getDataDir().absoluteFilePath("inbestcoinwallet.cfg"));
+  QFile cfgFile(getDataDir().absoluteFilePath("pinkstarcoinwallet.cfg"));
   if (cfgFile.open(QIODevice::ReadOnly)) {
     m_settings = QJsonDocument::fromJson(cfgFile.readAll()).object();
     cfgFile.close();
-  }
-
-  if (isOptimizationEnabled()) {
-	  setOptimizationEnabled(false);
   }
 
   restoreDefaultPoolList();
@@ -178,7 +174,7 @@ const Style& Settings::getStyle(quintptr _styleIndex) const {
 
 const Style& Settings::getCurrentStyle() const {
   QReadLocker lock(&m_lock);
-  QString theme = m_settings.contains(OPTION_WALLET_THEME) ? m_settings.value(OPTION_WALLET_THEME).toString() : "dark";
+  QString theme = m_settings.contains(OPTION_WALLET_THEME) ? m_settings.value(OPTION_WALLET_THEME).toString() : "light";
   return *m_styles[theme];
 }
 
@@ -471,7 +467,7 @@ bool Settings::isStartOnLoginEnabled() const {
     return false;
   }
 
-  QString autorunFilePath = autorunDir.absoluteFilePath("inbestcoinwallet.plist");
+  QString autorunFilePath = autorunDir.absoluteFilePath("pinkstarcoinwallet.plist");
   if (!QFile::exists(autorunFilePath)) {
     return false;
   }
@@ -489,12 +485,12 @@ bool Settings::isStartOnLoginEnabled() const {
     return false;
   }
 
-  QString autorunFilePath = autorunDir.absoluteFilePath("inbestcoinwallet.desktop");
+  QString autorunFilePath = autorunDir.absoluteFilePath("pinkstarcoinwallet.desktop");
   res = QFile::exists(autorunFilePath);
 #elif defined(Q_OS_WIN)
   QSettings autorunSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
-  res = autorunSettings.contains("inbestcoinWallet") &&
-    !QDir::fromNativeSeparators(autorunSettings.value("inbestcoinWallet").toString().split(' ')[0]).compare(QCoreApplication::applicationFilePath());
+  res = autorunSettings.contains("pinkstarcoinWallet") &&
+    !QDir::fromNativeSeparators(autorunSettings.value("pinkstarcoinWallet").toString().split(' ')[0]).compare(QCoreApplication::applicationFilePath());
 #endif
   return res;
 }
@@ -657,10 +653,10 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
       return;
     }
 
-    QString autorunFilePath = autorunDir.absoluteFilePath("inbestcoinwallet.plist");
+    QString autorunFilePath = autorunDir.absoluteFilePath("pinkstarcoinwallet.plist");
     QSettings autorunSettings(autorunFilePath, QSettings::NativeFormat);
     autorunSettings.remove("Program");
-    autorunSettings.setValue("Label", "org.inbestcoin.inbestcoinwallet");
+    autorunSettings.setValue("Label", "org.pinkstarcoin.pinkstarcoinwallet");
     autorunSettings.setValue("ProgramArguments", QVariantList() << QCoreApplication::applicationFilePath() << "--minimized");
     autorunSettings.setValue("RunAtLoad", _enable);
     autorunSettings.setValue("ProcessType", "InterActive");
@@ -679,7 +675,7 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
       return;
     }
 
-    QString autorunFilePath = autorunDir.absoluteFilePath("inbestcoinwallet.desktop");
+    QString autorunFilePath = autorunDir.absoluteFilePath("pinkstarcoinwallet.desktop");
     QFile autorunFile(autorunFilePath);
     if (!autorunFile.open(QFile::WriteOnly | QFile::Truncate)) {
       return;
@@ -688,7 +684,7 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
     if (_enable) {
       autorunFile.write("[Desktop Entry]\n");
       autorunFile.write("Type=Application\n");
-      autorunFile.write("Name=inbestcoin Wallet\n");
+      autorunFile.write("Name=pinkstarcoin Wallet\n");
       autorunFile.write(QString("Exec=%1 --minimized\n").arg(QCoreApplication::applicationFilePath()).toLocal8Bit());
       autorunFile.write("Terminal=false\n");
       autorunFile.write("Hidden=false\n");
@@ -700,9 +696,9 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
     QSettings autorunSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
     if (_enable) {
       QString appPath = QString("%1 --minimized").arg(QDir::toNativeSeparators(QCoreApplication::applicationFilePath()));
-      autorunSettings.setValue("inbestcoinWallet", appPath);
+      autorunSettings.setValue("pinkstarcoinWallet", appPath);
     } else {
-      autorunSettings.remove("inbestcoinWallet");
+      autorunSettings.remove("pinkstarcoinWallet");
     }
 #endif
   }
@@ -937,19 +933,19 @@ void Settings::removeObserver(ISettingsObserver* _settingsObserver) {
 #ifdef Q_OS_WIN
 void Settings::setUrlHandler() {
   QWriteLocker lock(&m_lock);
-  QSettings protocolSettings("HKEY_CURRENT_USER\\Software\\Classes\\inbestcoin", QSettings::NativeFormat);
-  protocolSettings.setValue(".", "URL:inbestcoin");
+  QSettings protocolSettings("HKEY_CURRENT_USER\\Software\\Classes\\pinkstarcoin", QSettings::NativeFormat);
+  protocolSettings.setValue(".", "URL:pinkstarcoin");
   protocolSettings.setValue("URL Protocol", "");
-  QSettings iconSettings("HKEY_CURRENT_USER\\Software\\Classes\\inbestcoin\\DefaultIcon", QSettings::NativeFormat);
+  QSettings iconSettings("HKEY_CURRENT_USER\\Software\\Classes\\pinkstarcoin\\DefaultIcon", QSettings::NativeFormat);
   iconSettings.setValue(".", QDir::toNativeSeparators(QCoreApplication::applicationFilePath()));
-  QSettings openSettings("HKEY_CURRENT_USER\\Software\\Classes\\inbestcoin\\shell\\open\\command", QSettings::NativeFormat);
+  QSettings openSettings("HKEY_CURRENT_USER\\Software\\Classes\\pinkstarcoin\\shell\\open\\command", QSettings::NativeFormat);
   QString commandString("\"%1\" \"%2\"");
   openSettings.setValue(".", commandString.arg(QDir::toNativeSeparators(QCoreApplication::applicationFilePath())).arg("%1"));
 }
 #endif
 
 void Settings::saveSettings() const {
-  QFile cfgFile(QDir(m_cmdLineParser->getDataDir()).absoluteFilePath("inbestcoinwallet.cfg"));
+  QFile cfgFile(QDir(m_cmdLineParser->getDataDir()).absoluteFilePath("pinkstarcoinwallet.cfg"));
   if (cfgFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
     QJsonDocument cfg_doc(m_settings);
     cfgFile.write(cfg_doc.toJson());

@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>:/images/inbestcoin</normaloff>:/images/inbestcoin</iconset>
+    <normaloff>:/images/pinkstarcoin</normaloff>:/images/pinkstarcoin</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -620,7 +620,7 @@
             <enum>Qt::NoFocus</enum>
            </property>
            <property name="text">
-            <string>SEND inbestcoinS</string>
+            <string>SEND PINKSTARCOIN</string>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -859,7 +859,7 @@
     </property>
     <addaction name="m_communityForumAction"/>
     <addaction name="m_reportIssueAction"/>
-    <addaction name="m_aboutinbestcoinAction"/>
+    <addaction name="m_aboutpinkstarcoinAction"/>
     <addaction name="m_aboutQtAction"/>
    </widget>
    <addaction name="menuFile"/>
@@ -916,12 +916,12 @@
     <string>Change password</string>
    </property>
   </action>
-  <action name="m_aboutinbestcoinAction">
+  <action name="m_aboutpinkstarcoinAction">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>About inbestcoin</string>
+    <string>About pinkstarcoin</string>
    </property>
   </action>
   <action name="m_aboutQtAction">
@@ -992,7 +992,7 @@
   </action>
   <action name="m_communityForumAction">
    <property name="text">
-    <string>Join us on Telegram</string>
+    <string>Join us on Discord</string>
    </property>
   </action>
   <action name="m_reportIssueAction">
@@ -1197,7 +1197,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>m_aboutinbestcoinAction</sender>
+   <sender>m_aboutpinkstarcoinAction</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>about()</slot>

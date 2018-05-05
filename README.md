@@ -1,19 +1,19 @@
-## About inbestcoin
+## About pinkstarcoin
 
-inbestcoin is a cryptocurrency focused on providing a decentralized mechanism of exchange, and anonymity via untraceable and unlinkable transactions.
+pinkstarcoin is a cryptocurrency focused on providing a decentralized mechanism of exchange, and anonymity via untraceable and unlinkable transactions.
 
 You can read more about it at https://coin.inbest.cloud
 
-## About inbestcoin-gui
+## About pinkstarcoin-gui
 
-This in a multi platform GUI wallet for inbestcoin.
+This is a multi-platform GUI wallet for pinkstarcoin.
 
-## Building inbestcoin-gui
+## Building pinkstarcoin-gui
 
 ### 1. Clone wallet sources
 
 ```
-git clone git@github.com:inbestcoin/inbestcoin-gui.git
+git clone git@github.com:mtl1979/pinkstarcoin-gui.git
 ```
 
 ### 2. Update git submodules
@@ -50,7 +50,7 @@ If you are building on an older processor without AVX support, add the following
 
 You may find it helpful to explicitly include Boostand QT paths:
 ```
-cmake.exe -DPORTABLE=1 -Wno-dev -DBOOST_ROOT=C:\boost_1_59_0 -DBOOST_LIBRARYDIR=C:\boost_1_59_0\libs\ -DCMAKE_PREFIX_PATH=C:\Qt\5.10.0\msvc2015_64 -G "Visual Studio 15 Win64" ..
+cmake.exe -DPORTABLE=1 -Wno-dev -DBOOST_ROOT=C:\boost_1_59_0 -DBOOST_LIBRARYDIR=C:\boost_1_59_0\libs\ -DCMAKE_PREFIX_PATH=D:\Qt\5.10.0\msvc2015_64 -G "Visual Studio 14 Win64" ..
 ```
 
 And then build from within MSVC.
@@ -76,37 +76,37 @@ cmake -DSTATIC=1 -DBOOST_ROOT=/boost_1_59_0 -DBOOST_LIBRARYDIR=/boost_1_59_0/lib
 
 #### To create a portable build
 
-##### On * nix
+##### On *nix
 
 ```
-cp src/inbestcoinwallet.desktop build/
-cp src/images/inbestcoin.png build/
+cp src/pinkstarcoinwallet.desktop build/
+cp src/images/pinkstarcoin.png build/
 cd build
-linuxdeployqt.AppImage inbestcoinwallet.desktop -appimage -verbose=2 -always-overwrite -no-translations
+linuxdeployqt.AppImage pinkstarcoinwallet.desktop -appimage -verbose=2 -always-overwrite -no-translations
 ```
 
 ##### On OS X
 
 ```
-./macdeployqt inbestcoin.app -dmg
+./macdeployqt PinkstarcoinWallet.app -dmg
 ```
 
 ##### On Windows
 
 ```
-windeployqt.exe inbestcoin.exe
+windeployqt.exe PinkstarcoinWallet.exe
 ```
 
 ## Community and support
 
 You can find us at:
 
-[Slack](https://join.slack.com/t/hackatoncriptomoneda/shared_invite/enQtMzM3Njc2MzUwNjkwLTY4Yjc1NTg4OTFkM2I5MzhlMGRkMGZlYzIwYTk0OGJmYWQ2MzI2NmE4ZDk5NWEwMDY0NWU1MzY3MGI2NTQ2ZDc)
+[Discord](https://discord.gg/u2hJYNZ)
 
 ## License
 
-inbestcoin-gui is licensed under the GNU Lesser General Public License v3.0
+pinkstarcoin-gui is licensed under the GNU Lesser General Public License v3.0
 
 ## Credits
 
-Based on https://github.com/valiant1x/intensecoinwallet/ and https://github.com/cryptonotefoundation/cryptonotewallet
+Partially based on [inbestcoin-gui](https://github.com/inbestcoin/inbestcoin-gui), [intensecoinwallet](https://github.com/valiant1x/intensecoinwallet/) and [cryptonotewallet](https://github.com/cryptonotefoundation/cryptonotewallet)

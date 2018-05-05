@@ -1,19 +1,19 @@
-// Copyright (c) 2015-2017, The Bytecoin developers
+// Copyright (c) 2015-2018, The Bytecoin developers
 //
 // This file is part of Bytecoin.
 //
-// inbestcoin is free software: you can redistribute it and/or modify
+// pinkstarcoin is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// inbestcoin is distributed in the hope that it will be useful,
+// pinkstarcoin is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with inbestcoin.  If not, see <http://www.gnu.org/licenses/>.
+// along with pinkstarcoin.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -34,7 +34,7 @@ namespace WalletGui {
 namespace {
 
 const char BLOG_RSS_SCHEME[] = "https";
-const char BLOG_RSS_HOST[] = "inbestcoin.com";
+const char BLOG_RSS_HOST[] = "pinkstarcoin.com";
 const char BLOG_RSS_PATH[] = "/feed/atom/";
 
 const char BLOG_RSS_ID_TAG_NAME[] = "id";
@@ -58,7 +58,7 @@ BlogReader::~BlogReader() {
 }
 
 QString BlogReader::getName() const {
-  return tr("inbestcoin Blog:");
+  return tr("pinkstarcoin Blog:");
 }
 
 QPixmap BlogReader::getIcon() const {

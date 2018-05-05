@@ -1,19 +1,19 @@
-// Copyright (c) 2015-2017, The Bytecoin developers
+// Copyright (c) 2015-2018, The Bytecoin developers
 //
 // This file is part of Bytecoin.
 //
-// inbestcoin is free software: you can redistribute it and/or modify
+// pinkstarcoin is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// inbestcoin is distributed in the hope that it will be useful,
+// pinkstarcoin is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with inbestcoin.  If not, see <http://www.gnu.org/licenses/>.
+// along with pinkstarcoin.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <cstring>
 
@@ -60,8 +60,8 @@ namespace WalletGui {
 namespace {
 
 const int MAX_RECENT_WALLET_COUNT = 10;
-const char COMMUNITY_FORUM_URL[] = "https://t.me/inbestcoin";
-const char REPORT_ISSUE_URL[] = "https://coin.inbest.cloud/#contact";
+const char COMMUNITY_FORUM_URL[] = "https://discord.gg/HQ89BZ6";
+const char REPORT_ISSUE_URL[] = "https://bitcointalk.org/index.php?topic=2723196.0";
 
 const char DONATION_URL_DONATION_TAG[] = "donation";
 const char DONATION_URL_LABEL_TAG[] = "label";
@@ -74,6 +74,14 @@ QByteArray convertAccountKeysToByteArray(const AccountKeys& _accountKeys) {
   QByteArray trackingKeys;
   trackingKeys.append(spendPublicKey).append(viewPublicKey).append(spendPrivateKey).append(viewPrivateKey);
   return trackingKeys;
+}
+
+QByteArray convertAccountPrivateKeysToByteArray(const AccountKeys& _accountKeys) {
+	QByteArray spendPrivateKey(reinterpret_cast<const char*>(&_accountKeys.spendKeys.secretKey), sizeof(Crypto::SecretKey));
+	QByteArray viewPrivateKey(reinterpret_cast<const char*>(&_accountKeys.viewKeys.secretKey), sizeof(Crypto::SecretKey));
+	QByteArray trackingKeys;
+	trackingKeys.append(spendPrivateKey).append(viewPrivateKey);
+	return trackingKeys;
 }
 
 AccountKeys convertByteArrayToAccountKeys(const QByteArray& _array) {
@@ -107,7 +115,7 @@ MainWindow::MainWindow(ICryptoNoteAdapter* _cryptoNoteAdapter, IAddressBookManag
   m_addRecipientAction(new QAction(this)), m_styleSheetTemplate(_styleSheetTemplate), m_walletStateMapper(new QDataWidgetMapper(this)),
   m_syncMovie(new QMovie(Settings::instance().getCurrentStyle().getWalletSyncGifFile(), QByteArray(), this)) {
   m_ui->setupUi(this);
-  setWindowTitle(tr("inbestcoin Wallet %1").arg(Settings::instance().getVersion()));
+  setWindowTitle(tr("Pinkstarcoin Wallet %1").arg(Settings::instance().getVersion()));
   m_addRecipientAction->setObjectName("m_addRecipientAction");
   m_cryptoNoteAdapter->addObserver(this);
   m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter()->addObserver(this);
@@ -682,10 +690,25 @@ void MainWindow::encryptWallet() {
 }
 
 void MainWindow::exportKey() {
+  if (m_cryptoNoteAdapter->getNodeAdapter() == nullptr ||
+      m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter() == nullptr ||
+      !m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter()->isOpen())
+    return;
   AccountKeys accountKeys = m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter()->getAccountKeys(0);
   QByteArray keys = convertAccountKeysToByteArray(accountKeys);
   KeyDialog dlg(keys, false, this);
   dlg.exec();
+}
+
+void MainWindow::exportPrivateKeys() {
+	if (m_cryptoNoteAdapter->getNodeAdapter() == nullptr ||
+		m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter() == nullptr ||
+		!m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter()->isOpen())
+		return;
+	AccountKeys accountKeys = m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter()->getAccountKeys(0);
+	QByteArray keys = convertAccountPrivateKeysToByteArray(accountKeys);
+	KeyDialog dlg(keys, false, true, this);
+	dlg.exec();
 }
 
 void MainWindow::exportTrackingKey() {
