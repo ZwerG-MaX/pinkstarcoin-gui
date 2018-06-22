@@ -40,6 +40,7 @@ public:
   virtual INodeAdapter* getNodeAdapter() const = 0;
   virtual bool isValidAddress(const QString& _address) const = 0;
   virtual bool isValidPaymentId(const QString& _paymentId) const = 0;
+  virtual size_t getDecimalPlaces() const = 0;
   virtual QString getCurrencyTicker() const = 0;
   virtual quint64 getMinimalFee() const = 0;
   virtual quint64 getTargetTime() const = 0;

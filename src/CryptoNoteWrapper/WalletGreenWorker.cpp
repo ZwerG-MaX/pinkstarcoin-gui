@@ -1,19 +1,20 @@
 // Copyright (c) 2015-2018, The Bytecoin developers
+// Copyright (c) 2018, The PinkstarcoinV2 developers
 //
 // This file is part of Bytecoin.
 //
-// pinkstarcoin is free software: you can redistribute it and/or modify
+// PinkstarcoinV2 is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// pinkstarcoin is distributed in the hope that it will be useful,
+// PinkstarcoinV2 is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with pinkstarcoin.  If not, see <http://www.gnu.org/licenses/>.
+// along with PinkstarcoinV2.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDir>
 #include <QEventLoop>
@@ -385,29 +386,6 @@ void WalletGreenWorker::close() {
   m_isEncrypted.store(false);
   m_isSaved.store(false);
   WalletLogger::info(tr("[Wallet] Wallet closed"));
-}
-
-bool WalletGreenWorker::resetPendingTransactions() const {
-	
-	SemaphoreLocker locker(m_walletSemaphore);
-	bool ret = false;
-	WalletLogger::debug(tr("[Wallet] Resetting unconfirmed transactions..."));
-	m_dispatcher->remoteSpawn([this, &ret]() {
-		SemaphoreUnlocker unlocker(m_walletSemaphore);
-		try {
-			m_wallet->resetPendingTransactions();
-			ret = true;
-		}
-		catch (const std::system_error& _error) {
-			WalletLogger::critical(tr("[Wallet] Reset unconfirmed error: %1").arg(_error.code().message().data()));
-		}
-		catch (const std::exception& _error) {
-			WalletLogger::critical(tr("[Wallet] Reset unconfirmed runtime error: %1").arg(_error.what()));
-		}
-	});
-
-	locker.wait();
-	return ret;
 }
 
 bool WalletGreenWorker::isOpen() const {

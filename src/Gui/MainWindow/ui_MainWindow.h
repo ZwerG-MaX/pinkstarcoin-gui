@@ -63,8 +63,7 @@ public:
     QAction *m_resetAction;
     QAction *m_saveKeysAction;
     QAction *m_exportKeyAction;
-	QAction *m_exportPrivateKeyAction;
-    QAction *m_removePendingTxAction;
+    QAction *m_exportPrivateKeyAction;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_2;
     QFrame *m_headerFrame;
@@ -196,11 +195,8 @@ public:
         m_saveKeysAction->setObjectName(QStringLiteral("m_saveKeysAction"));
         m_exportKeyAction = new QAction(MainWindow);
         m_exportKeyAction->setObjectName(QStringLiteral("m_exportKeyAction"));
-		m_exportPrivateKeyAction = new QAction(MainWindow);
-		m_exportPrivateKeyAction->setObjectName(QStringLiteral("m_exportPrivateKeyAction"));
-        m_removePendingTxAction = new QAction(MainWindow);
-        m_removePendingTxAction->setObjectName(QStringLiteral("m_removePendingTxAction"));
-        m_removePendingTxAction->setCheckable(false);
+        m_exportPrivateKeyAction = new QAction(MainWindow);
+        m_exportPrivateKeyAction->setObjectName(QStringLiteral("m_exportPrivateKeyAction"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         verticalLayout_2 = new QVBoxLayout(centralwidget);
@@ -579,7 +575,6 @@ public:
         menuFile->addAction(m_exitAction);
         menuSettings->addAction(m_encryptWalletAction);
         menuSettings->addAction(m_changePasswordAction);
-        menuSettings->addAction(m_removePendingTxAction);
         menuSettings->addSeparator();
         menuSettings->addAction(m_autostartAction);
         menuSettings->addAction(m_minimizeToTrayAction);
@@ -597,7 +592,6 @@ public:
         QObject::connect(m_openWalletAction, SIGNAL(triggered()), MainWindow, SLOT(openWallet()));
         QObject::connect(m_encryptWalletAction, SIGNAL(triggered()), MainWindow, SLOT(encryptWallet()));
         QObject::connect(m_changePasswordAction, SIGNAL(triggered()), MainWindow, SLOT(encryptWallet()));
-		QObject::connect(m_removePendingTxAction, SIGNAL(triggered()), MainWindow, SLOT(removePendingTx()));
         QObject::connect(m_aboutQtAction, SIGNAL(triggered()), MainWindow, SLOT(aboutQt()));
         QObject::connect(m_backupWalletAction, SIGNAL(triggered()), MainWindow, SLOT(backupWallet()));
         QObject::connect(m_aboutpinkstarcoinAction, SIGNAL(triggered()), MainWindow, SLOT(about()));
@@ -637,7 +631,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         m_changePasswordAction->setToolTip(QApplication::translate("MainWindow", "Change password", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        m_aboutpinkstarcoinAction->setText(QApplication::translate("MainWindow", "About pinkstarcoin", Q_NULLPTR));
+        m_aboutpinkstarcoinAction->setText(QApplication::translate("MainWindow", "About PinkstarcoinV2", Q_NULLPTR));
         m_aboutQtAction->setText(QApplication::translate("MainWindow", "About Qt", Q_NULLPTR));
         m_backupWalletAction->setText(QApplication::translate("MainWindow", "Backup wallet", Q_NULLPTR));
         m_autostartAction->setText(QApplication::translate("MainWindow", "Start on system login", Q_NULLPTR));
@@ -663,7 +657,6 @@ public:
         m_exportKeyAction->setToolTip(QApplication::translate("MainWindow", "Export key", Q_NULLPTR));
 		m_exportPrivateKeyAction->setToolTip(QApplication::translate("MainWindow", "Export secret key", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        m_removePendingTxAction->setText(QApplication::translate("MainWindow", "Remove pending TXs", Q_NULLPTR));
         m_logoLabel->setText(QString());
         m_noWalletLabel->setText(QApplication::translate("MainWindow", "No active wallet", Q_NULLPTR));
         m_walletLabel->setText(QApplication::translate("MainWindow", "Your wallet:", Q_NULLPTR));
@@ -684,7 +677,7 @@ public:
         m_balanceCopyLabel->setText(QApplication::translate("MainWindow", "Copied!", Q_NULLPTR));
         m_balanceIconLabel->setText(QString());
         m_overviewButton->setText(QApplication::translate("MainWindow", "OVERVIEW", Q_NULLPTR));
-        m_sendButton->setText(QApplication::translate("MainWindow", "SEND PINKSTARCOIN", Q_NULLPTR));
+        m_sendButton->setText(QApplication::translate("MainWindow", "SEND PINKSTARCOINV2", Q_NULLPTR));
         m_transactionsButton->setText(QApplication::translate("MainWindow", "TRANSACTIONS", Q_NULLPTR));
         m_blockExplorerButton->setText(QApplication::translate("MainWindow", "BLOCK EXPLORER", Q_NULLPTR));
         m_addressBookButton->setText(QApplication::translate("MainWindow", "CONTACTS", Q_NULLPTR));

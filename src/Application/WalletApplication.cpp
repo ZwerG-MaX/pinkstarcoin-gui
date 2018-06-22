@@ -1,5 +1,5 @@
-// Copyright (c) 2018-2018, pinkstarcoin developers
 // Copyright (c) 2015-2018, The Bytecoin developers
+// Copyright (c) 2018, The PinkstarcoinV2 developers
 //
 // This file is part of Bytecoin.
 //
@@ -153,9 +153,9 @@ bool WalletApplication::init() {
   }
 #endif
   if (!m_lockFile->tryLock()) {
-    WalletLogger::warning(tr("[Application] pinkstarcoin wallet already running"));
+    WalletLogger::warning(tr("[Application] PinkstarcoinV2 wallet already running"));
     if (!paymentUrl.isValid()) {
-      QMessageBox::warning(nullptr, QObject::tr("Fail"), "pinkstarcoin wallet already running");
+      QMessageBox::warning(nullptr, QObject::tr("Fail"), "PinkstarcoinV2 wallet already running");
     }
 
     return false;

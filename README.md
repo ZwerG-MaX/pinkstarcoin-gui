@@ -48,7 +48,7 @@ If you are building on an older processor without AVX support, add the following
 -DPORTABLE=1 -DWITH_AVX2=0
 ```
 
-You may find it helpful to explicitly include Boostand QT paths:
+You may find it helpful to explicitly include Boost and QT paths:
 ```
 cmake.exe -DPORTABLE=1 -Wno-dev -DBOOST_ROOT=C:\boost_1_59_0 -DBOOST_LIBRARYDIR=C:\boost_1_59_0\libs\ -DCMAKE_PREFIX_PATH=D:\Qt\5.10.0\msvc2015_64 -G "Visual Studio 14 Win64" ..
 ```

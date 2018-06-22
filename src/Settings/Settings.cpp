@@ -1,19 +1,20 @@
 // Copyright (c) 2015-2018, The Bytecoin developers
+// Copyright (c) 2018, The PinkstarcoinV2 developers
 //
 // This file is part of Bytecoin.
 //
-// pinkstarcoin is free software: you can redistribute it and/or modify
+// PinkstarcoinV2 is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// pinkstarcoin is distributed in the hope that it will be useful,
+// PinkstarcoinV2 is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with pinkstarcoin.  If not, see <http://www.gnu.org/licenses/>.
+// along with PinkstarcoinV2.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QCoreApplication>
 #include <QFile>
@@ -64,14 +65,14 @@ const char OPTION_CLOSE_TO_TRAY[] = "closeToTray";
 const char OPTION_PRIVACY_PARAMS[] = "privacyParams";
 const char OPTION_PRIVACY_NEWS_ENABLED[] = "newsEnabled";
 
-const char DEFAULT_WALLET_FILE_NAME[] = "pinkstarcoin.wallet";
+const char DEFAULT_WALLET_FILE_NAME[] = "pinkstarcoinv2.wallet";
 const quint64 DEFAULT_OPTIMIZATION_PERIOD = 1000 * 60 * 30; // 30 minutes
 const quint64 DEFAULT_OPTIMIZATION_THRESHOLD = 10000000000000;
 const quint64 DEFAULT_OPTIMIZATION_MIXIN = 6;
 
-const quint64 VERSION_MAJOR = 1;
-const quint64 VERSION_MINOR = 4;
-const quint64 VERSION_PATCH = 2;
+const quint64 VERSION_MAJOR = 2;
+const quint64 VERSION_MINOR = 0;
+const quint64 VERSION_PATCH = 0;
 
 }
 
@@ -82,7 +83,8 @@ Settings& Settings::instance() {
 
 
 Settings::Settings() : m_p2pBindPort(0), m_cmdLineParser(nullptr) {
-  m_defaultPoolList << "pnks.poolmining.us:3333";
+  m_defaultPoolList << "pool.pinkstarcoin.com:3333";
+  m_defaultPoolList << "poolmining.us:3333";
 
   Style* lightStyle = new LightStyle();
   Style* darkStyle = new DarkStyle();
@@ -684,7 +686,7 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
     if (_enable) {
       autorunFile.write("[Desktop Entry]\n");
       autorunFile.write("Type=Application\n");
-      autorunFile.write("Name=pinkstarcoin Wallet\n");
+      autorunFile.write("Name=PinkstarcoinV2 Wallet\n");
       autorunFile.write(QString("Exec=%1 --minimized\n").arg(QCoreApplication::applicationFilePath()).toLocal8Bit());
       autorunFile.write("Terminal=false\n");
       autorunFile.write("Hidden=false\n");

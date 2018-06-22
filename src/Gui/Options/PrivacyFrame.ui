@@ -71,14 +71,14 @@
       <item>
        <widget class="QCheckBox" name="m_newsCheck">
         <property name="text">
-         <string>I want to see pinkstarcoin Blog feeds</string>
+         <string>I want to see PinkstarcoinV2 Blog feeds</string>
         </property>
        </widget>
       </item>
       <item alignment="Qt::AlignTop">
        <widget class="WalletGui::WalletSmallGrayTextLabel" name="m_embeddedHelperLabel">
         <property name="text">
-         <string>Checking this box will result in updated Overview screen. It will now show you the latest posts of pinkstarcoin Blog providing you with fresh pinkstarcoin news.</string>
+         <string>Checking this box will result in updated Overview screen. It will now show you the latest posts of PinkstarcoinV2 Blog providing you with fresh PinkstarcoinV2 news.</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

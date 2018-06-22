@@ -1,19 +1,20 @@
 // Copyright (c) 2015-2018, The Bytecoin developers
+// Copyright (c) 2018, The PinkstarcoinV2 developers
 //
 // This file is part of Bytecoin.
 //
-// pinkstarcoin is free software: you can redistribute it and/or modify
+// PinkstarcoinV2 is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// pinkstarcoin is distributed in the hope that it will be useful,
+// PinkstarcoinV2 is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with pinkstarcoin.  If not, see <http://www.gnu.org/licenses/>.
+// along with PinkstarcoinV2.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <cstring>
 
@@ -115,7 +116,7 @@ MainWindow::MainWindow(ICryptoNoteAdapter* _cryptoNoteAdapter, IAddressBookManag
   m_addRecipientAction(new QAction(this)), m_styleSheetTemplate(_styleSheetTemplate), m_walletStateMapper(new QDataWidgetMapper(this)),
   m_syncMovie(new QMovie(Settings::instance().getCurrentStyle().getWalletSyncGifFile(), QByteArray(), this)) {
   m_ui->setupUi(this);
-  setWindowTitle(tr("Pinkstarcoin Wallet %1").arg(Settings::instance().getVersion()));
+  setWindowTitle(tr("PinkstarcoinV2 Wallet %1").arg(Settings::instance().getVersion()));
   m_addRecipientAction->setObjectName("m_addRecipientAction");
   m_cryptoNoteAdapter->addObserver(this);
   m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter()->addObserver(this);
@@ -267,16 +268,12 @@ void MainWindow::synchronizationProgressUpdated(quint32 _current, quint32 _total
     return;
   }
 
-  if (m_ui->m_removePendingTxAction->isEnabled())
-	  m_ui->m_removePendingTxAction->setEnabled(false);
-
   qreal value = static_cast<qreal>(_current) / _total;
   m_ui->m_syncProgress->setValue(value * m_ui->m_syncProgress->maximum());
 }
 
 void MainWindow::synchronizationCompleted() {
   m_ui->m_syncProgress->setValue(m_ui->m_syncProgress->maximum());
-  m_ui->m_removePendingTxAction->setEnabled(true);
 }
 
 void MainWindow::balanceUpdated(quint64 _actualBalance, quint64 _pendingBalance) {
@@ -395,7 +392,6 @@ void MainWindow::setClosedState() {
   m_ui->m_exportTrackingKeyAction->setEnabled(false);
   m_ui->m_encryptWalletAction->setEnabled(false);
   m_ui->m_changePasswordAction->setEnabled(false);
-  m_ui->m_removePendingTxAction->setEnabled(false);
 
   m_ui->m_overviewFrame->hide();
   m_ui->m_sendFrame->hide();
@@ -652,14 +648,6 @@ void MainWindow::resetWallet() {
   walletAdapter->close();
   walletAdapter->addObserver(this);
   m_ui->m_noWalletFrame->openWallet(Settings::instance().getWalletFile(), QString());
-}
-
-void MainWindow::removePendingTx() {
-	IWalletAdapter* walletAdapter = m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter();
-	if (walletAdapter->resetPendingTransactions())
-		QMessageBox::information(this, "Transactions reset", "Transactions reset successfully.", QMessageBox::Ok);
-	else
-		QMessageBox::warning(this, "Transaction reset failed", "Failed to reset transactions. Check debug log.", QMessageBox::Ok);
 }
 
 void MainWindow::encryptWallet() {

@@ -844,7 +844,6 @@
     </widget>
     <addaction name="m_encryptWalletAction"/>
     <addaction name="m_changePasswordAction"/>
-    <addaction name="m_removePendingTxAction"/>
     <addaction name="separator"/>
     <addaction name="m_autostartAction"/>
     <addaction name="m_minimizeToTrayAction"/>
@@ -921,7 +920,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>About pinkstarcoin</string>
+    <string>About PinkstarcoinV2</string>
    </property>
   </action>
   <action name="m_aboutQtAction">
@@ -1016,14 +1015,6 @@
    </property>
    <property name="toolTip">
     <string>Export key</string>
-   </property>
-  </action>
-  <action name="m_removePendingTxAction">
-   <property name="checkable">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Remove pending TXs</string>
    </property>
   </action>
  </widget>
