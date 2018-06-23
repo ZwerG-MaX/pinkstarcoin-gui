@@ -2,7 +2,7 @@
 
 pinkstarcoin is a cryptocurrency focused on providing a decentralized mechanism of exchange, and anonymity via untraceable and unlinkable transactions.
 
-You can read more about it at https://coin.inbest.cloud
+You can read more about it at https://www.pinkstarcoin.com
 
 ## About pinkstarcoin-gui
 
