@@ -20,7 +20,7 @@ git clone git@github.com:mtl1979/pinkstarcoin-gui.git
 
 ```
 git submodule update --init --recursive
-git submodule foreach git pull origin gui
+git submodule foreach git pull origin master
 ```
 
 ### 3. Build
@@ -101,7 +101,7 @@ windeployqt.exe PinkstarcoinWallet.exe
 
 You can find us at:
 
-[Discord](https://discord.gg/u2hJYNZ)
+[Discord](https://discord.gg/CaVQQNT)
 
 ## License
 
