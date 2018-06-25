@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=pinkstarcoin Wallet
 Comment=pinkstarcoin wallet
-Exec=pinkstarcoin %U
+Exec=PinkstarcoinWallet %U
 Terminal=false
 Type=Application
 Icon=pinkstarcoin
