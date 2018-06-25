@@ -1,11 +1,10 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=pinkstarcoin Wallet
-Comment=pinkstarcoin wallet
+Name=PinkstarcoinV2 Wallet
+Comment=PinkstarcoinV2 wallet
 Exec=PinkstarcoinWallet %U
 Terminal=false
 Type=Application
 Icon=pinkstarcoin
 MimeType=x-scheme-handler/pinkstarcoin;
 Categories=Office;Finance;
-Name[it]=pinkstarcoinwallet.desktop

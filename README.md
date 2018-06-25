@@ -78,11 +78,17 @@ cmake -DSTATIC=1 -DBOOST_ROOT=/boost_1_59_0 -DBOOST_LIBRARYDIR=/boost_1_59_0/lib
 
 ##### On *nix
 
+Dependencies: [linuxdeployqt](https://github.com/probonopd/linuxdeployqt/releases)
+
 ```
-cp src/pinkstarcoinwallet.desktop build/
-cp src/images/pinkstarcoin.png build/
-cd build
-linuxdeployqt.AppImage pinkstarcoinwallet.desktop -appimage -verbose=2 -always-overwrite -no-translations
+rm -rf build/appimage
+mkdir build/appimage
+cp src/pinkstarcoinwallet.desktop build/appimage
+cp src/images/pinkstarcoin.png build/appimage
+cp build/PinkstarcoinWallet build/appimage
+cd build/appimage
+linuxdeployqt-continuous-x86_64.AppImage pinkstarcoinwallet.desktop -appimage -verbose=2 -always-overwrite -no-translations
+mv PinkstarcoinV2_Wallet-x86_64.AppImage ..
 ```
 
 ##### On OS X
