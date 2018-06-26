@@ -8,6 +8,7 @@ WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 OUTPUT_VARIABLE GIT_REVISION)
 
 set(CRYPTONOTE_LIB cryptonote)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cryptonote/cmake")
 
 include_directories(${CMAKE_BINARY_DIR}
   src
@@ -237,5 +238,8 @@ endif (APPLE)
 
 qt5_use_modules(${PROJECT_NAME} Widgets Gui Network)
 
-add_subdirectory(cryptonote/external)
-#add_subdirectory(cryptonote/src)
+if(MSVC)
+  add_subdirectory(cryptonote/external)
+else()
+  add_subdirectory(cryptonote/external/rocksdb)
+endif()

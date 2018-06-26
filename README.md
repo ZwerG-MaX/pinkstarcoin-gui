@@ -66,12 +66,12 @@ You may download them from:
 * https://www.qt.io/
 
 ```
-mkdir build && cd build && cmake -DSTATIC=1 .. && make
+mkdir build && cd build && cmake -DSTATIC=1 -DWITH_TESTS=0 -DWITH_TOOLS=0 .. && make
 ```
 
 You may find it helpful to explicitly include Boost and QT paths
 ```
-cmake -DSTATIC=1 -DBOOST_ROOT=/boost_1_59_0 -DBOOST_LIBRARYDIR=/boost_1_59_0/libs/ -DCMAKE_PREFIX_PATH=/qt/5.10 ..
+cmake -DSTATIC=1 -DWITH_TESTS=0 -DWITH_TOOLS=0 -DBOOST_ROOT=/boost_1_59_0 -DBOOST_LIBRARYDIR=/boost_1_59_0/libs/ -DCMAKE_PREFIX_PATH=/qt/5.10 ..
 ```
 
 #### To create a portable build
