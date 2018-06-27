@@ -138,7 +138,7 @@ file(GLOB_RECURSE CRYPTONOTE_SOURCES
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
 file(GLOB_RECURSE HEADERS src/*.h)
-file(GLOB_RECURSE FORMS src/gui/ui/*.ui)
+file(GLOB_RECURSE FORMS src/Gui/*/*.ui)
 
 if(MSVC)
   include_directories(Platform/Windows)
