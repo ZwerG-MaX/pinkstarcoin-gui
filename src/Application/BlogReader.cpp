@@ -34,16 +34,15 @@ namespace WalletGui {
 
 namespace {
 
-const char BLOG_RSS_SCHEME[] = "https";
-const char BLOG_RSS_HOST[] = "PinkstarcoinV2.com";
-const char BLOG_RSS_PATH[] = "/feed/atom/";
+const char BLOG_RSS_SCHEME[] = "http";
+const char BLOG_RSS_HOST[] = "www.pinkstarcoin.com";
+const char BLOG_RSS_PATH[] = "/feed/";
 
-const char BLOG_RSS_ID_TAG_NAME[] = "id";
+const char BLOG_RSS_ID_TAG_NAME[] = "guid";
 const char BLOG_RSS_LINK_TAG_NAME[] = "link";
-const char BLOG_RSS_LINK_HREF_ATTRIBUTE_NAME[] = "href";
 const char BLOG_RSS_TITLE_TAG_NAME[] = "title";
-const char BLOG_RSS_CONTENT_TAG_NAME[] = "content";
-const char BLOG_RSS_UPDATED_TAG_NAME[] = "updated";
+const char BLOG_RSS_CONTENT_TAG_NAME[] = "content:encoded";
+const char BLOG_RSS_UPDATED_TAG_NAME[] = "pubDate";
 
 const int MAX_MESSAGE_COUNT = 5;
 
@@ -213,20 +212,20 @@ void BlogReader::processBlogReplyData(const QString& _data) {
   QList<MessageItem> newMessages;
   while (!xml.atEnd() && newMessages.size() < MAX_MESSAGE_COUNT) {
     xml.readNext();
-    if (xml.isStartElement() && !xml.name().compare(QLatin1String("entry"))) {
+    if (xml.isStartElement() && !xml.name().compare(QLatin1String("item"))) {
       MessageItem messageItem;
-	  bool isLinkSet = false;
-      while (!xml.atEnd() && !(xml.isEndElement() && !xml.name().compare(QLatin1String("entry")))) {
+      bool isLinkSet = false;
+      while (!xml.atEnd() && !(xml.isEndElement() && !xml.name().compare(QLatin1String("item")))) {
         xml.readNext();
         if (xml.isStartElement()) {
           if (!xml.name().compare(QLatin1String(BLOG_RSS_ID_TAG_NAME))) {
             messageItem.messageId = xml.readElementText();
           } else if(!xml.name().compare(QLatin1String(BLOG_RSS_LINK_TAG_NAME)) && !isLinkSet) {
-            messageItem.messageSourceUrl = xml.attributes().value(BLOG_RSS_LINK_HREF_ATTRIBUTE_NAME).toString();
-			isLinkSet = true;
+            messageItem.messageSourceUrl = xml.readElementText();
+            isLinkSet = true;
           } else if(!xml.name().compare(QLatin1String(BLOG_RSS_TITLE_TAG_NAME))) {
             messageItem.messageTitle = xml.readElementText();
-          } else if(!xml.name().compare(QLatin1String(BLOG_RSS_CONTENT_TAG_NAME))) {
+          } else if(!xml.qualifiedName().compare(QLatin1String(BLOG_RSS_CONTENT_TAG_NAME))) {
             QString htmlText = xml.readElementText();
             QTextDocument textDoc;
             textDoc.setHtml(htmlText);
