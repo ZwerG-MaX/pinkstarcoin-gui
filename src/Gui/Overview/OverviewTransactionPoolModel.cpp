@@ -28,7 +28,7 @@ namespace WalletGui {
 
 namespace {
 
-const int AMOUNT_DECIMAL_COUNT = 3;
+const int AMOUNT_DECIMAL_COUNT = 2;
 
 }
 
